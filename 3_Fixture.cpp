@@ -7,7 +7,7 @@ public:
 	void PressMinus() {}
 	void PressEquals() {}
 
-	Calculator(int n) {}
+	// Calculator(int n) {}
 };
 
 #include <gtest/gtest.h>
