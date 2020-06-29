@@ -12,7 +12,7 @@
 //   : EQ, TRUE, FALSE, NE, LT, LE, GT, GE
 //   => 단언문이 실패하더라도, 이후의 코드는 계속 수행된다.
 //      하지만, 하나라도 실패하면, 테스트의 결과는 실패이다.
-TEST(GoogleTest, Sample1) {
+TEST(DISABLED_GoogleTest, Sample1) {
 	int expected1 = 42;
 	int expected2 = 42;
 
@@ -33,7 +33,7 @@ TEST(GoogleTest, Sample2) {
 	// EXPECT_EQ(s1, s2);  // ?
 
 	const char* s3 = s1.c_str();
-	const char* s4 = "Hello";
+	const char* s4 = "hello";
 
 	EXPECT_STREQ(s3, s4);     // 대소문자 체크
 	EXPECT_STRCASEEQ(s3, s4); // 대소문자 무시
@@ -44,7 +44,7 @@ TEST(GoogleTest, Sample2) {
 // 3. 부동 소수점(float, double)
 //  : EXPECT_DOUBLE_EQ
 //    EXPECT_NEAR: 오차 범위를 직접 설정하는 것이 가능합니다.
-TEST(GoogleTest, Sample3) {
+TEST(GoogleTest, DISABLED_Sample3) {
 	double a = 0.7;
 	double b = 0.1 * 7;
 
@@ -89,6 +89,40 @@ TEST(GoogleTest, Sample4) {
 		FAIL() << "다른 종류의 예외가 발생하였음...";
 	}
 }
+
+
+// 5. 테스트 비활성화
+//  => Google Test는 TestSuite 또는 Test의 이름이
+//     DISABLED_ 시작하면, 비활성화됩니다.
+//  왜 필요한가?
+//    : 테스트를 주석 처리하면, 잊혀진다.
+//      아무도 테스트가 존재했다는 사실을 알 수 없다.
+//      유지 보수가 필요한 테스트에 대해서는 비활성화기능을 통해
+//      처리하는 것이 좋다.
+//   주의할 점
+//     : TEST_F에서 TestSuite 이름을 변경할 때는 전체 변경해야 한다.
+//   $ ./a.out --gtest_also_run_disabled_test
+//     : 비활성화된 테스트도 같이 수행할 수 있다.
+
+class DISABLED_FooTest : public testing::Test {
+};
+
+TEST_F(DISABLED_FooTest, foo) {
+	// 1. 작성 중인 테스트는 반드시 실패해야 한다.
+	FAIL() << "작성중입니다...";
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
