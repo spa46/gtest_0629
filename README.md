@@ -11,6 +11,8 @@ $ cd ~/chansik.yun
 $ g++ ./gtest/gtest-all.cc -c -I.
 $ ar rcv libgtest.a gtest-all.o
 
+$ g++ 1_시작.cpp -I. -lgtest -L. -pthread
+
 ```
 
 ## 라이브러리
