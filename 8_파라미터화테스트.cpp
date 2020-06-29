@@ -3,6 +3,7 @@
 //       데이터 중심의 테스트에서 코드 중복을 없애는 기법.
 //  => xUnit Test Framework
 bool IsPrime(int value) {
+	return false;
 	for (int i = 2; i < value; ++i) {
 		if (value % i == 0)
 			return false;
@@ -13,27 +14,42 @@ bool IsPrime(int value) {
 
 #include <gtest/gtest.h>
 
-int data[] = { 2, 3, 5, 7, 11, 13, 17, 19 };
+// 1. TestSuite class - TestWithParam
+#if 0
+class PrimeTest : public testing::Test {
+};
+#endif
 
-// 1. 루프
-//  ; 테스트 바디 안에서는 제어 구문의 작성은 테스트의 
-//    유지보수에 좋지 않다.
-TEST(PrimeTest, IsPrime_Loop) {
-	for (int i = 0 ; i < sizeof(data) / sizeof(data[0]) ; ++i) 
-		EXPECT_TRUE(IsPrime(data[i]));
+// TestWithParam<InputType>: Template Class
+class PrimeTest : public testing::TestWithParam<int> {
+
+};
+
+using testing::Values;
+// 2. Data Set 정의 - INSTANTIATE_TEST_SUITE_P
+//  : 전역 변수를 정의하는 매크로
+//    첫번째 인자: 변수명
+//    두번째 인자: Test Suite 이름
+// int data[] = { 2, 3, 5, 7, 11, 13, 17, 19 };
+INSTANTIATE_TEST_SUITE_P(PrimeValues, PrimeTest, 
+	Values(2, 3, 5, 7, 11, 13, 17, 19));
+
+
+// 3. 이제 다양한 테스트 함수를 작성하면 됩니다.
+// TEST / TEST_F - X
+// TEST_P: 파라미터화 테스트 생성 매크로 - GetParam()
+TEST_P(PrimeTest, IsPrime) {
+	EXPECT_TRUE(IsPrime(GetParam()));
 }
 
-// 2. 루프 X - 코드 중복!
-TEST(PrimeTest, IsPrime) {
-	EXPECT_TRUE(IsPrime(2));
-	EXPECT_TRUE(IsPrime(3));
-	EXPECT_TRUE(IsPrime(5));
-	EXPECT_TRUE(IsPrime(7));
-	EXPECT_TRUE(IsPrime(11));
-	EXPECT_TRUE(IsPrime(13));
-	EXPECT_TRUE(IsPrime(17));
-	EXPECT_TRUE(IsPrime(19));
+TEST_P(PrimeTest, IsPrime2) {
+	EXPECT_TRUE(IsPrime(GetParam()));
 }
+
+
+
+
+
 
 
 

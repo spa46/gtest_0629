@@ -3,6 +3,7 @@
 //       데이터 중심의 테스트에서 코드 중복을 없애는 기법.
 //  => xUnit Test Framework
 bool IsPrime(int value) {
+	return false;
 	for (int i = 2; i < value; ++i) {
 		if (value % i == 0)
 			return false;
@@ -38,14 +39,10 @@ INSTANTIATE_TEST_SUITE_P(PrimeValues, PrimeTest,
 // TEST / TEST_F - X
 // TEST_P: 파라미터화 테스트 생성 매크로 - GetParam()
 TEST_P(PrimeTest, IsPrime) {
-	printf("Prime: %d\n", GetParam());
-	
 	EXPECT_TRUE(IsPrime(GetParam()));
 }
 
 TEST_P(PrimeTest, IsPrime2) {
-	printf("Prime2: %d\n", GetParam());
-	
 	EXPECT_TRUE(IsPrime(GetParam()));
 }
 
