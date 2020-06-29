@@ -55,8 +55,40 @@ TEST(GoogleTest, Sample3) {
 	// EXPECT_EQ(a, b); // if (a == b) - X
 }
 
+void IsValidFilename(const std::string& filename) {
+	// throw 1;
+	if (filename.empty()) {
+		throw std::invalid_argument("파일이름이 비어있음..");
+	}
+}
+
+// 4. 예외 테스트
+//  : IsValidFilename에 빈문자열을 전달하였을 때, invalid_argument 예외가
+//    제대로 발생하는지 여부를 검증하고 싶다.
+// - 아래의 코드는 xUnit Test Framework에서 예외검증을 제공하지 않을 때
+// 사용하던 방법입니다.
+//  : EXPECT_THROW / ASSERT_THROW
+TEST(GoogleTest, Sample4_withExceptionTest) {
+	std::string emptyFilename = "";
+
+	EXPECT_THROW(IsValidFilename(emptyFilename), 
+		std::invalid_argument) << "빈 문자열을 전달하였을 때"; 
+	
+}
 
 
+TEST(GoogleTest, Sample4) {
+	std::string emptyFilename = "";
+	
+	try {
+		IsValidFilename(emptyFilename);
+		FAIL() << "예외가 발생하지 않았음...";
+	} catch (std::invalid_argument&) {
+		SUCCEED();
+	} catch (...) {
+		FAIL() << "다른 종류의 예외가 발생하였음...";
+	}
+}
 
 
 
