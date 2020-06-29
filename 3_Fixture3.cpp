@@ -60,6 +60,8 @@ public:
 protected:
 	Calculator* calc;
 
+	// void Setup() {}
+
 	void SetUp() override {
 		printf("SetUp()\n");
 		calc = new Calculator;
@@ -91,8 +93,6 @@ TEST_F(CalculatorTest, PlusTest2) {
 
 TEST_F(CalculatorTest, PlusTest) {
 	// Calculator* calc = new Calculator;
-	
-	
 	calc->Enter(2);
 	calc->PressPlus();
 	calc->Enter(2);
