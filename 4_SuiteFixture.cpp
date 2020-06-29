@@ -10,6 +10,10 @@
 //      테스트가 느려서 개발자들이 코드가 변경되어도, 테스트를 수행하지 않는다.
 //   "픽스쳐의 설치와 해체로 인해 발생된 느린 테스트"
 //    =>  Suite Fixture SetUp / TearDown 
+//    => 문제점: "공유 픽스쳐 전략"
+//      -> 이제는 Test Suite안의 모든 테스트는 독립적이지 않다.
+//       : 이로 인해서, "변덕스러운 테스트"의 문제가 발생할 위험이 있습니다
+//       - 공유 픽스쳐의 상태에 따라 테스트의 결과가 변경될 수 있습니다.
 //
 //  SuiteFixture Setup
 //  DatabaseTest* ts = new DatabaseTest;
@@ -44,6 +48,7 @@ public:
 
 //-----------------------------------
 #if 1
+// 공유 픽스쳐 전략
 #include <gtest/gtest.h>
 
 class DatabaseTest : public testing::Test {
@@ -99,6 +104,7 @@ TEST_F(DatabaseTest, goo) {
 }
 #endif
 #if 0
+// 신선한 픽스쳐 전략
 #include <gtest/gtest.h>
 
 class DatabaseTest : public testing::Test {
