@@ -1,0 +1,115 @@
+{
+  "tests": 6,
+  "failures": 1,
+  "disabled": 0,
+  "errors": 0,
+  "timestamp": "2020-06-29T06:43:25Z",
+  "time": "0s",
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "SampleTest",
+      "tests": 3,
+      "failures": 1,
+      "disabled": 0,
+      "errors": 0,
+      "timestamp": "2020-06-29T06:43:25Z",
+      "time": "0s",
+      "testsuite": [
+        {
+          "name": "foo",
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2020-06-29T06:43:25Z",
+          "time": "0s",
+          "classname": "SampleTest",
+          "cpu": "80%",
+          "mem": "15%"
+        },
+        {
+          "name": "goo",
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2020-06-29T06:43:25Z",
+          "time": "0s",
+          "classname": "SampleTest",
+          "cpu": "80%",
+          "mem": "15%"
+        },
+        {
+          "name": "hoo",
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2020-06-29T06:43:25Z",
+          "time": "0s",
+          "classname": "SampleTest",
+          "cpu": "80%",
+          "mem": "15%",
+          "failures": [
+            {
+              "failure": "7_GoogleTestOptions.cpp:33\nFailed",
+              "type": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FooTest",
+      "tests": 1,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "timestamp": "2020-06-29T06:43:25Z",
+      "time": "0s",
+      "testsuite": [
+        {
+          "name": "foo",
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2020-06-29T06:43:25Z",
+          "time": "0s",
+          "classname": "FooTest"
+        }
+      ]
+    },
+    {
+      "name": "GooTest",
+      "tests": 1,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "timestamp": "2020-06-29T06:43:25Z",
+      "time": "0s",
+      "testsuite": [
+        {
+          "name": "goo",
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2020-06-29T06:43:25Z",
+          "time": "0s",
+          "classname": "GooTest"
+        }
+      ]
+    },
+    {
+      "name": "HooTest",
+      "tests": 1,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "timestamp": "2020-06-29T06:43:25Z",
+      "time": "0s",
+      "testsuite": [
+        {
+          "name": "hoo",
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2020-06-29T06:43:25Z",
+          "time": "0s",
+          "classname": "HooTest"
+        }
+      ]
+    }
+  ]
+}

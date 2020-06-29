@@ -73,7 +73,6 @@ TEST(GoogleTest, Sample4_withExceptionTest) {
 
 	EXPECT_THROW(IsValidFilename(emptyFilename), 
 		std::invalid_argument) << "빈 문자열을 전달하였을 때"; 
-	
 }
 
 

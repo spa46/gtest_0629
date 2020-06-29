@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="6" failures="1" disabled="0" errors="0" time="0" timestamp="2020-06-29T06:43:28" name="AllTests">
+  <testsuite name="SampleTest" tests="3" failures="1" disabled="0" errors="0" time="0" timestamp="2020-06-29T06:43:28">
+    <testcase name="foo" status="run" result="completed" time="0" timestamp="2020-06-29T06:43:28" classname="SampleTest">
+<properties>
+<property name="cpu" value="80%"/>
+<property name="mem" value="15%"/>
+</properties>
+    </testcase>
+    <testcase name="goo" status="run" result="completed" time="0" timestamp="2020-06-29T06:43:28" classname="SampleTest">
+<properties>
+<property name="cpu" value="80%"/>
+<property name="mem" value="15%"/>
+</properties>
+    </testcase>
+    <testcase name="hoo" status="run" result="completed" time="0" timestamp="2020-06-29T06:43:28" classname="SampleTest">
+      <failure message="7_GoogleTestOptions.cpp:33&#x0A;Failed" type=""><![CDATA[7_GoogleTestOptions.cpp:33
+Failed]]></failure>
+<properties>
+<property name="cpu" value="80%"/>
+<property name="mem" value="15%"/>
+</properties>
+    </testcase>
+  </testsuite>
+  <testsuite name="FooTest" tests="1" failures="0" disabled="0" errors="0" time="0" timestamp="2020-06-29T06:43:28">
+    <testcase name="foo" status="run" result="completed" time="0" timestamp="2020-06-29T06:43:28" classname="FooTest" />
+  </testsuite>
+  <testsuite name="GooTest" tests="1" failures="0" disabled="0" errors="0" time="0" timestamp="2020-06-29T06:43:28">
+    <testcase name="goo" status="run" result="completed" time="0" timestamp="2020-06-29T06:43:28" classname="GooTest" />
+  </testsuite>
+  <testsuite name="HooTest" tests="1" failures="0" disabled="0" errors="0" time="0" timestamp="2020-06-29T06:43:28">
+    <testcase name="hoo" status="run" result="completed" time="0" timestamp="2020-06-29T06:43:28" classname="HooTest" />
+  </testsuite>
+</testsuites>
