@@ -9,10 +9,10 @@ $ cd ./googletest/googletest/scripts
 $ ./fuse_gtest_files.py ~/chansik.yun
 $ cd ~/chansik.yun
 $ g++ ./gtest/gtest-all.cc -c -I.
-$ ar rcv libgtest.a gtest-all.o
+$ g++ ./googletest/googletest/src/gtest_main.cc -c -I.
+$ ar rcv libgtest.a gtest-all.o gtest_main.o
 
 $ g++ 1_시작.cpp -I. -lgtest -L. -pthread
-
 ```
 
 ## 라이브러리

@@ -3,6 +3,9 @@
 #include <gtest/gtest.h>
 
 // 2. main 함수
+//  : 아래의 main 함수의 내용은 변하지 않습니다.
+//  => gtest 라이브러리에 main을 포함하면, 편리하게 사용할 수 있습니다.
+#if 0
 int main(int argc, char** argv) {
 	// 2-1 라이브러리 초기화
 	testing::InitGoogleTest(&argc, argv);
@@ -10,3 +13,4 @@ int main(int argc, char** argv) {
 	// 2-2 테스트 실행
 	return RUN_ALL_TESTS();
 }
+#endif
