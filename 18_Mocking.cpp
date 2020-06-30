@@ -20,10 +20,8 @@ struct MP3 {
 	virtual std::string GetName() const = 0;
 	virtual void Foo() noexcept = 0;
 
-#if 0
 	virtual std::pair<bool, int> GetPair() const = 0;
 	virtual bool CheckMap(std::map<int, double> a, bool b) = 0;
-#endif
 };
 
 class MockMP3 : public MP3 {
@@ -33,7 +31,17 @@ public:
 
 	MOCK_METHOD(std::string, GetName, (), (override, const));
 	MOCK_METHOD(void, Foo, (), (override, noexcept));
+
+	// 주의할점
+	//  - 반환 타입이 템플릿인 경우, 쉼표가 존재하면, 괄호로 한번더
+	//    감싸주어야 한다. 
+	MOCK_METHOD((std::pair<bool, int>), GetPair, (), (override, const));
+
+	// - 인자에서 템플릿이 존재하는 경우, 쉼표가 존재하면 괄호로 한번더
+	//   감싸주어야 한다.
+	MOCK_METHOD(bool, CheckMap, ((std::map<int, double> a), bool b), (override));
 };
+
 
 TEST(MockTest, Foo) {
 	MockMP3 mock; 
