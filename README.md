@@ -23,7 +23,8 @@ $ cd ./googletest/googlemock/scripts
 $ ./fuse_gmock_files.py ~/chansik.yun
 $ cd ~/chansik.yun
 $ g++ gmock-gtest-all.cc -c -I.
-$ ar rcv libgtest.a gmock-gtest-all.o
+$ g++ ./googletest/googlemock/src/gmock_main.cc -c -I.
+$ ar rcv libgtest.a gmock-gtest-all.o gmock_main.o
 ```
 
 
