@@ -32,6 +32,13 @@ public:
 	MOCK_METHOD(std::string, GetName, (), (override, const));
 	MOCK_METHOD(void, Foo, (), (override, noexcept));
 
+	using BoolAndInt = std::pair<bool, int>;
+	MOCK_METHOD(BoolAndInt, GetPair, (), (override, const));
+
+	using MapIntDouble = std::map<int, double>;
+	MOCK_METHOD(bool, CheckMap, (MapIntDouble a, bool b), (override));
+
+#if 0
 	// 주의할점
 	//  - 반환 타입이 템플릿인 경우, 쉼표가 존재하면, 괄호로 한번더
 	//    감싸주어야 한다. 
@@ -40,6 +47,7 @@ public:
 	// - 인자에서 템플릿이 존재하는 경우, 쉼표가 존재하면 괄호로 한번더
 	//   감싸주어야 한다.
 	MOCK_METHOD(bool, CheckMap, ((std::map<int, double> a), bool b), (override));
+#endif
 };
 
 
