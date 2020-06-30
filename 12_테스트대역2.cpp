@@ -15,6 +15,16 @@
 //           3) 의존성 주입 방법
 //             - 생성자 주입: 의존객체가 필수적일때
 //             - 메소드 주입: 의존객체가 필수적이지 않을때 
+//
+//           * 의존성 주입 문제점
+//             : 보일러플레이트가 발생한다.`
+//              => 의존성 주입 프레임워크를 사용하면 없앨 수 있다.
+//
+//             A - B, C, D
+//             B* b = new B;
+//             C* c = new C;
+//             D* d = new D;
+//             A* a = new A(b, c, d);
 
 
 struct IFileSystem {
@@ -90,25 +100,8 @@ TEST_F(LoggerTest, IsValidLogFilename_NameShorteThan5Chars_ReturnsFalse) {
 	EXPECT_FALSE(actual) << "파일명이 다섯글자 미만일 때";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// * 테스트 대역 종류 4가지
+// 1. Test Stub
+// 2. Fake Object
+// 3. Test Spy
+// 4. Mock Object
