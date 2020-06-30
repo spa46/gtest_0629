@@ -20,10 +20,71 @@ public:
 	
 	void Write(Level level, const std::string& message) {
 		for (DLoggerTarget* p : targets) {
-		// p->Write(level, message);
+			//  p->Write(level, message);
 		}
 	}
 };
+
+//-----------------------------------
+// 1. Gmock Header include
+#include <gmock/gmock.h>
+
+// 2. Mocking - 모의객체를 선언하는 작업
+//   Google Mock - Macro를 통해 제공
+// MOCK_METHOD{N}(함수의 이름, 함수의 시그니처) - 1.10 이전 버전까지
+// MOCK_METHOD(함수의 반환타입, 이름, 인자, 한정자) - 1.10 이후의 매크로
+
+class MockDLoggerTarget : public DLoggerTarget {
+public:
+	MOCK_METHOD(void, Write, (Level level, const std::string& message));
+};
+
+// 3. 이제 테스트를 작성하면 됩니다. 
+TEST(DLoggerTest, WriteTest) {
+	// Arrange
+	DLogger logger;
+	MockDLoggerTarget mock1, mock2;
+	logger.AddTarget(&mock1);
+	logger.AddTarget(&mock2);
+	Level test_level = INFO;
+	std::string test_message = "test_message";
+	
+	// EXPECT_CALL의 구문은 Act 이전에 작성되어야 합니다.
+	// Assert
+	EXPECT_CALL(mock1, Write(test_level, test_message));
+	EXPECT_CALL(mock2, Write(test_level, test_message));
+
+	// Act
+	logger.Write(test_level, test_message);
+}
+
+
+#if 0
+struct DLoggerTarget {
+	virtual void Write(Level level, const std::string& message) = 0;
+};
+
+이제는 더 이상 사용하지 않습니다.
+$ ./gmock_gen.py ~/chansik.yun/DLoggerTarget.h
+class MockDLoggerTarget : public DLoggerTarget {
+ public:
+  MOCK_METHOD2(Write,
+      void(Level level, const std::string& message));
+  MOCK_METHOD3(Go,
+      void(int a, double b, char c));
+};
+#endif
+
+#if 0
+struct DLoggerTarget {
+	virtual ~DLoggerTarget() {}
+
+	virtual void Write(Level level, const std::string& message) = 0;
+	virtual void Go(int a, double b, char c) = 0;
+};
+#endif
+
+
 
 // Mock Object Pattern
 //  의도: 함수를 호출하였을 때, 발생하는 부수효과를 관찰할 수 없어서,
@@ -40,12 +101,3 @@ public:
 //     => C++  - Google Mock
 //              : 1.8부터 Google Test에 기본적으로 포함되었습니다.
 //        Java - jMock, EasyMock, 'Mockito', Spock ...
-
-#include <gtest/gtest.h>
-
-
-
-
-
-
-
