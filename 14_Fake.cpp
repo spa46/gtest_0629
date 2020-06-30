@@ -100,7 +100,7 @@ TEST_F(UserManagerTest, SaveLoadTest) {
 	manager.Save(&expected);
 	User* actual = manager.Load(testName);
 
-	EXPECT_NE(*actual, expected) << "Load 하였을 때";
+	EXPECT_EQ(*actual, expected) << "Load 하였을 때";
 	// 사용자 정의 객체를 대상으로 단언 함수를 사용할 경우,
 	// '연산자 오버로딩'이 필요합니다.
 }
