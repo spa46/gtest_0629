@@ -2,6 +2,10 @@
 // SUT
 #include <stdio.h>
 
+// 한계: 테스트 전용 하위 클래스를 적용하기 위해서는,
+//       Engine의 클래스가 상속이 가능한 형태로 설계되어야 한다. 
+//         1) 가상 소멸자
+//         2) 훅 하고자 하는 메소드가 virtual 이어야 한다. 
 class Engine {
 public:
 	Engine() { printf("Engine()\n"); }
@@ -19,7 +23,7 @@ public:
 
 	void Go() {
 		// ....
-		// engine->Start();
+		engine->Start();
 	}
 };
 //---------------
@@ -58,7 +62,7 @@ TEST(CarTest, GoTest) {
 
 	car.Go();
 
-	// ????
+	// !!!
 }
 
 
