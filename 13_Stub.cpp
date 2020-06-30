@@ -13,11 +13,17 @@ public:
 	}
 };
 
+// 인터페이스 문제점
+//  : 약한 결합을 형성하지만, 새로운 기능을 추가하기 어렵다.
 struct IConnection {
 	virtual ~IConnection() {}
 
 	virtual void Move(int x, int y) = 0;
 	virtual void Attack() = 0;
+
+	// 기본 구현을 제공하는 함수
+	virtual void Foo() {
+	}
 };
 
 class TCPConnection : public IConnection {
@@ -48,6 +54,10 @@ public:
 
 // Stub - 테스트에서 원하는 결과를 주는 협력 객체
 // 1. 테스트 대역 규칙 - 협력 객체의 인터페이스를 구현한다.
+//  : 협력 객체의 인터페이스가 복잡할 경우, 테스트 대역을 만드는 
+//    부담도 커진다.
+//     - 인터페이스가 간단할 수록 좋다.
+//       : ISP(Interface Segregation Principle)
 class StubConnection : public IConnection {
 public:
 	void Move(int x, int y) override {
