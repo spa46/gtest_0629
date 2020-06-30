@@ -5,7 +5,7 @@
 //    : EQ, TRUE, FALSE, NE, LT, LE, GT, GE
 //    : 테스트가 실패하면, 이후의 코드는 수행되지 않는다.
 //      단언문 이후에 단언문이 존재하면, '죽은 단언문'이 될 수 있다.
-//    => 테스트 함수 안에 최소환의 단언문을 사용하자.
+//    => 테스트 함수 안에 최소한의 단언문을 사용하자.
 //      : 테스트의 개수가 늘어날 수 있다.
 //
 // EXPECT_
@@ -26,11 +26,11 @@ TEST(DISABLED_GoogleTest, Sample1) {
 #include <string>
 
 // 2. C-Style(const char*) 문자열 비교
-//  : EXPECT_STREQ
+//  : EXPECT_STREQ / EXPECT_STRNE / EXPECT_STRCASEEQ / EXPECT_STRECASENE
 TEST(GoogleTest, Sample2) {
 	std::string s1 = "hello";
 	std::string s2 = "hello";
-	// EXPECT_EQ(s1, s2);  // ?
+	EXPECT_EQ(s1, s2);  
 
 	const char* s3 = s1.c_str();
 	const char* s4 = "hello";
@@ -43,6 +43,7 @@ TEST(GoogleTest, Sample2) {
 
 // 3. 부동 소수점(float, double)
 //  : EXPECT_DOUBLE_EQ
+//    EXPECT_FLOAT_EQ
 //    EXPECT_NEAR: 오차 범위를 직접 설정하는 것이 가능합니다.
 TEST(GoogleTest, DISABLED_Sample3) {
 	double a = 0.7;
@@ -50,7 +51,7 @@ TEST(GoogleTest, DISABLED_Sample3) {
 
 	EXPECT_DOUBLE_EQ(a, b); // 4ULP's(Unit in the last place)
 	// EXPECT_NEAR(a, b, 0.00000000001);
-	EXPECT_NEAR(a, b, 0);
+	EXPECT_NEAR(a, b, 0.00000001);
 
 	// EXPECT_EQ(a, b); // if (a == b) - X
 }

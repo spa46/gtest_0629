@@ -12,7 +12,7 @@
 //       체크할 때 사용할 수 있습니다.
 // ./a.out --gtest_repeat=100 --gtest_shuffle --gtest_break_on_failure
 //
-// 3) Test Result Formatter
+// 3) Test Result Formatter 
 // $ ./a.out --gtest_output=xml,json
 //    => test_detail.xml / json
 //

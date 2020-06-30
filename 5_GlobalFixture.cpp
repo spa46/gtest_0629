@@ -2,7 +2,7 @@
 
 
 // Global Fixture 
-//  - Google Test의 기능입니다.
+//  - Google Test의 기능입니다.(xUnit Test Pattern X)
 //  - 프로그램이 시작할 때 수행되는 SetUp()
 //    프로그램이 종료하기 전에 수행되는 TearDown()을 정의합니다.
 //

@@ -9,6 +9,8 @@ public:
 
 	FRIEND_TEST(UserTest, AgeTest); // !!
 private:
+	int GetAge() const { return age; }
+
 	int age;
 };
 

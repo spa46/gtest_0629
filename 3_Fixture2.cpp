@@ -19,7 +19,7 @@ public:
 class CalculatorTest : public testing::Test {
 	// 테스트 유틸리티 함수를 제공할 때,  private으로 제공하면, 테스트에서 접근할 수 없습니다. 최소 protected를 사용해야 합니다. 
 protected:
-	// Test Utility Method
+	// Test Utility Method - Creation Method
 	Calculator* Create() { return new Calculator; }
 };
 

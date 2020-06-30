@@ -1,3 +1,4 @@
+## 설치 방법
 ```
 $ wget https://github.com/google/googletest/archive/release-1.10.0.tar.gz
 $ tar xvf release-1.10.0.tar.gz
