@@ -13,7 +13,6 @@ int Job() {
 
 #include <gtest/gtest.h>
 
-
 // 방법 2. 별도의 ASSERT 제공한다. - Junit5
 #define EXPECT_TIMEOUT(fn, sec) \
 	do {                        \
