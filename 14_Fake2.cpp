@@ -40,37 +40,36 @@ public:
 };
 
 //-------------------------------
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <map>
-// Google Mock으로 대체해봅시다.
 
-// 문제: 아직 Database 구현체가 준비되지 않았다.
-// => Fake Object Pattern
-// 의도: '아직 준비되지 않은 의존 객체'로 인해서, 테스트 안된 요구사항이 있다.
-// 방법: 동일한 기능을 제공하는 '가벼운 테스트 대역'을 만들어서,
-//       문제를 해결하자.
-// [활용]
-// 1) 아직 준비되지 않은 객체
-// 2) 사용하기 어려울 때
-// 3) 의존 객체가 너무 느려서, 느린 테스트의 문제가 발생할 때
-//
-// [문제점]
-// : 제품 코드와 상관없는 코드.
-//  - Docker
 class FakeDatabase : public IDatabase {
 	std::map<std::string, User*> data;
 public:
-	void SaveUser(const std::string& name, User* user) override {
+	MOCK_METHOD(void, SaveUser, (const std::string& name, User* user), (override));
+	MOCK_METHOD(User*, LoadUser, (const std::string& name), (override));
+
+	void DelegateToFake() {
+		ON_CALL(*this, SaveUser)
+			.WillByDefault([this](const std::string& name, User* user) {
+				SaveUserImpl(name, user);
+			});
+
+		ON_CALL(*this, LoadUser)
+			.WillByDefault([this](const std::string& name) {
+				return LoadUserImpl(name);
+			});
+	}
+
+	void SaveUserImpl(const std::string& name, User* user) {
 		data[name] = user;
 	}
 
-	User* LoadUser(const std::string& name) override {
+	User* LoadUserImpl(const std::string& name) {
 		return data[name];
 	}
 };
 
-// EXPECT_EQ(==), NE(!=), LT(<), GT(>), LE(<=), GE(<=)
-//  : 연산자 오버로딩 함수
 bool operator==(const User& lhs, const User& rhs) {
 	return lhs.GetName() == rhs.GetName() &&
 		lhs.GetAge() == rhs.GetAge();
@@ -80,7 +79,6 @@ bool operator!=(const User& lhs, const User& rhs) {
 	return !(lhs == rhs);
 }
 
-// 객체를 문자열의 형태로 표현할 때 사용하는 함수
 std::ostream& operator<<(std::ostream& os, const User& user) {
 	return os << "User(name=" << user.GetName() << ", age=" 
 		<< user.GetAge() << ")";
@@ -89,8 +87,10 @@ std::ostream& operator<<(std::ostream& os, const User& user) {
 class UserManagerTest : public ::testing::Test {
 };
 
+using testing::NiceMock;
 TEST_F(UserManagerTest, SaveLoadTest) {
-	FakeDatabase fake;
+	NiceMock<FakeDatabase> fake;
+	fake.DelegateToFake();
 	UserManager manager(&fake);
 	std::string testName = "test_name";
 	int testAge = 42;
@@ -99,10 +99,23 @@ TEST_F(UserManagerTest, SaveLoadTest) {
 	manager.Save(&expected);
 	User* actual = manager.Load(testName);
 
-	EXPECT_NE(*actual, expected) << "Load 하였을 때";
-	// 사용자 정의 객체를 대상으로 단언 함수를 사용할 경우,
-	// '연산자 오버로딩'이 필요합니다.
+	EXPECT_EQ(*actual, expected) << "Load 하였을 때";
 }
+
+TEST_F(UserManagerTest, SaveLoadTest2) {
+	NiceMock<FakeDatabase> fake;
+	fake.DelegateToFake();
+	UserManager manager(&fake);
+	std::string testName = "test_name";
+	int testAge = 42;
+	User expected(testName, testAge);
+
+	EXPECT_CALL(fake, SaveUser(testName, &expected));
+
+	manager.Save(&expected);
+}
+
+
 
 
 
