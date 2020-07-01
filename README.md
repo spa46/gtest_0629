@@ -33,3 +33,7 @@ $ ar rcv libgtest.a gmock-gtest-all.o gmock_main.o
 ## 라이브러리
 1. 동적
 2. 정적: gtest는 정적 라이브러리를 권장합니다.
+
+# Reference
+- https://chromium.googlesource.com/external/github.com/google/googletest/+/HEAD/googlemock/docs/cook_book.md
+- https://github.com/google/googletest/tree/master/googlemock/docs
