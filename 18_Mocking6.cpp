@@ -33,6 +33,23 @@ public:
 };
 
 //-------------------------------------
+class MockPacketStream : public PacketStream {
+public:
+	// virtual void AppendPacket(Packet* new_packet) = 0;
+	// virtual const Packet* GetPacket(size_t packet_number) const = 0;
+
+	MOCK_METHOD(void, AppendPacket, (Packet* new_packet), (override));
+	MOCK_METHOD(const Packet*, GetPacket, (size_t packet_number), (override, const));
+};
+
+TEST(PacketReaderTest, ReadPacketsTest_withMock) {
+	MockPacketStream stream;
+	PacketReader reader;
+
+	reader.ReadPackets(&stream, 42);
+}
+
+
 TEST(PacketReaderTest, ReadPacketsTest) {
 	ConcreatPacketStream stream;
 	PacketReader reader;

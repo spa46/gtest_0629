@@ -31,6 +31,37 @@ public:
 };
 
 //-------------------------------------
+
+// 클래스 템플릿은 타입 추론이 불가능하다.
+// 템플릿 함수는 타입 추론이 가능하다.
+//  => 객체를 생성하는 템플릿 함수를 만들면, 암시적 추론이 가능하기 때문에
+//     편리하다.
+
+class MockPacketStream {
+public:
+	// void AppendPacket(Packet* new_packet);
+	// const Packet* GetPacket(size_t packet_number) const;
+
+	MOCK_METHOD(void, AppendPacket, (Packet* new_packet));
+	MOCK_METHOD(const Packet*, GetPacket, (size_t packet_number), (const));
+};
+
+template <typename T>
+PacketReader<T>* CreatePacketReader(const T& ref) {
+	return new PacketReader<T>();
+}
+
+
+TEST(PacketReaderTest, ReadPacketsTest_withMock) {
+	MockPacketStream stream;
+
+	auto reader = CreatePacketReader(stream);
+
+	// PacketReader<MockPacketStream> reader;
+	// reader.ReadPackets(&stream, 42);
+}
+
+
 TEST(PacketReaderTest, ReadPacketsTest) {
 	ConcreatPacketStream stream;
 	PacketReader<ConcreatPacketStream> reader;
