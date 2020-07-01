@@ -28,10 +28,19 @@ public:
 //     => 하드코딩 - Stub을 만들때 사용하는 기술입니다.
 //        로직     - Fake를 만들때도 사용할 수 있습니다.
 
-using testing::Return;
+using testing::Return;  // 결과 반환
+using testing::Throw;   // 예외를 던진다.
 using testing::NiceMock;
 // 행위 기반 검증을 수행하지 않을 경우, NiceMock을 통해 경고를 제거하는 것이
 // 좋다.
+
+TEST(UserTest, MockTest2) {
+	NiceMock<MockUser> user;
+	ON_CALL(user, GetName())
+		.WillByDefault(Throw(std::invalid_argument("invalid arg")));
+
+	EXPECT_THROW(user.GetName(), std::invalid_argument);
+}
 
 TEST(UserTest, MockTest) {
 	// User user;
@@ -46,14 +55,3 @@ TEST(UserTest, MockTest) {
 
 	std::cout << name << ", " << age << std::endl;
 }
-
-
-
-
-
-
-
-
-
-
-
