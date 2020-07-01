@@ -26,7 +26,13 @@ public:
 // 2. Mocking 된 함수의 결과를 제어하기 위해서, gMock은 ON_CALL 이라는
 //    매크로를 제공합니다.
 //     => 하드코딩 - Stub을 만들때 사용하는 기술입니다.
+//              : Return, Throw, ...
 //        로직     - Fake를 만들때도 사용할 수 있습니다.
+
+
+// ON_CALL
+//   - WillByDefault
+//     : 인자로 함수(함수 객체)를 받도록 되어 있다.
 
 using testing::Return;  // 결과 반환
 using testing::Throw;   // 예외를 던진다.
