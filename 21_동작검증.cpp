@@ -46,11 +46,12 @@ using testing::Ge;
 using testing::NotNull;
 using testing::HasSubstr;
 using testing::_;
+
 using testing::AllOf;  // &&
 using testing::AnyOf;  // ||
+using testing::Not;    // !
 
 using testing::NiceMock;
-
 TEST(UserTest, DoTest4) {
 	NiceMock<MockUser> mock;
 
@@ -64,9 +65,9 @@ TEST(UserTest, DoTest3) {
 	NiceMock<MockUser> mock;
 
 	// Add의 첫번째 인자는 1 ~ 10 - x >= 1 && x <= 10
-	// Add의 두번째 인자는 10보다 작거나, 20보다 크거나 - x < 10 || x > 20
+	// Add의 두번째 인자는 10보다 작거나, 20보다 크거나 - !(x < 10 || x > 20)
 	auto firstArgMatcher = AllOf(Ge(1), Le(10));
-	auto secondArgMatcher = AnyOf(Lt(10), Ge(20));
+	auto secondArgMatcher = Not(AnyOf(Lt(10), Ge(20)));
 	EXPECT_CALL(mock, Add(firstArgMatcher, secondArgMatcher));
 
 	// Act
