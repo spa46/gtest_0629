@@ -9,6 +9,8 @@ public:
 		printf("Foo::DefaultImpl - %s\n", str);
 		return 100;
 	}
+
+	virtual void Move(int x, int y) = 0;
 };
 
 class MockFoo : public Foo {
@@ -16,11 +18,30 @@ public:
 	MOCK_METHOD(int, PureFunc, (), (override));
 	MOCK_METHOD(int, DefaultImpl, (const char* str), (override));
 
+	MOCK_METHOD(void, Move, (int x, int y), (override));
+
 	// 부모의 기능을 MockFoo를 통해서 사용하기 위해서는 별도의 함수가 필요합니다.
 	int FooDefaultImpl(const char* str) {
 		return Foo::DefaultImpl(str);
 	}
 };
+
+TEST(FooTest, MoveTest) {
+
+	MockFoo mock;
+	ON_CALL(mock, Move).WillByDefault([](int a, int b) {
+		printf("Move - Lambda\n");
+	});
+	ON_CALL(mock, Move(10, 20)).WillByDefault([](int a, int b) {
+		printf("Move - (10, 20)\n");
+	});
+
+	// ON_CALL이 동일한 함수에 대해서 정의되었을 경우,
+	// 최근에 등록된것부터 체크해서, 처리한다.
+	mock.Move(30, 40);
+}
+
+
 
 TEST(FooTest, Foo) {
 	MockFoo mock;
