@@ -49,7 +49,6 @@ private:
 };
 
 // Mock에 대한 메소드 호출이 가짜 객체를 통해 처리하고 싶다.
-
 TEST(CalcTest, DoCalcTest) {
 	// FakeCalc calc;
 	MockCalc calc;
@@ -57,6 +56,7 @@ TEST(CalcTest, DoCalcTest) {
 	
 	EXPECT_CALL(calc, Add(10, 20)); 
 	EXPECT_CALL(calc, Sub(10, 20));
+
 	DoCalc(&calc);
 }
 
