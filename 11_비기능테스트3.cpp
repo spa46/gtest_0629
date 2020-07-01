@@ -14,6 +14,9 @@ public:
 #ifdef GTEST_LEAK_TEST
 	static int allocCount;
 
+	// new Image
+	//  1) 메모리 할당. - operator new
+	//  2) 할당된 메모리를 대상으로 생성자가 호출.
 	void* operator new(size_t size) {
 		allocCount++;
 		return malloc(size);
@@ -39,6 +42,9 @@ void foo() {
 	delete p2;
 }
 
+// 1. Test Suite
+// 2. GTest Listener - *
+//   :  모든 테스트의 실행에 대해서 훅을 등록할 수 있는 기능
 class FooTest : public testing::Test {
 	int currentAlloc;
 protected:

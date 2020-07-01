@@ -21,7 +21,7 @@ public:
 	
 	void Write(Level level, const std::string& message) {
 		for (DLoggerTarget* p : targets) {
-		// p->Write(level, message);
+			p->Write(level, message);
 		}
 	}
 };

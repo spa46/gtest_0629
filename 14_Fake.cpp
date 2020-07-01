@@ -1,5 +1,4 @@
 // 14_Fake Object
-
 #include <string>
 
 class User {
@@ -44,6 +43,7 @@ public:
 //-------------------------------
 #include <gtest/gtest.h>
 #include <map>
+// Google Mock으로 대체해봅시다.
 
 // 문제: 아직 Database 구현체가 준비되지 않았다.
 // => Fake Object Pattern
@@ -100,7 +100,7 @@ TEST_F(UserManagerTest, SaveLoadTest) {
 	manager.Save(&expected);
 	User* actual = manager.Load(testName);
 
-	EXPECT_EQ(*actual, expected) << "Load 하였을 때";
+	EXPECT_NE(*actual, expected) << "Load 하였을 때";
 	// 사용자 정의 객체를 대상으로 단언 함수를 사용할 경우,
 	// '연산자 오버로딩'이 필요합니다.
 }

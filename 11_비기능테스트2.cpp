@@ -63,7 +63,8 @@ protected:
 class Job1Sec : public JobTest<1> {
 protected:
 	void SetUp() override {
-		JobTest::SetUp(); // !!
+		JobTest::SetUp(); // 비기능 테스트를 온전히 활용하기 위해서는
+		                  // 부모의 메소드를 명시적으로 호출해야 한다. !!
 	}
 
 	void TearDown() override {

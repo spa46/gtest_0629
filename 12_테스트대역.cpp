@@ -1,4 +1,13 @@
 // 12_테스트대역.cpp
+//
+//  이전에는 Test Double을 총칭해서 Mock으로 불렀다.
+//  Test Double - "xUnit Test Pattern 정리"
+//  1) Test Stub
+//  2) Fake Object
+//  3) Test Spy
+//  4) Mock Object
+//  외) Dummy - 인자 체크용으로 사용하는 객체
+//
 #include <string>
 
 class FileSystem {

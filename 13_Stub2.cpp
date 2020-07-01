@@ -23,6 +23,7 @@ public:
 //------------------------
 // 자정에 User의 Do를 호출하였을 경우, 100을 반환하는지 여부를 검증하고 싶다.
 #include <gtest/gtest.h>
+// Gmock으로 변경해봅시다. 
 
 class StubTime : public Time {
 public:

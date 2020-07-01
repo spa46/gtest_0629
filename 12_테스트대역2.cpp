@@ -7,6 +7,7 @@
 // * 테스트 대역을 적용할 수 있는 설계
 //  : 의존하는 객체에 대해서 강한 결합이 아닌 약한 결합을 사용해야 합니다. 
 //  '강한 결합': 의존 객체의 구체적인 타입에 의존하는 것
+//          - 의존 객체를 직접 생성할 경우, 강한 결합이 형성된다.
 //  '약한 결합': 의존 객체를 이용할 때, 구체적인 타입이 아닌 인터페이스나
 //               추상 클래스 타입에 의존하는 것
 //           1) 인터페이스 / 추상 클래스
@@ -18,7 +19,9 @@
 //
 //           * 의존성 주입 문제점
 //             : 보일러플레이트가 발생한다.`
-//              => 의존성 주입 프레임워크를 사용하면 없앨 수 있다.
+//              => '의존성 주입 프레임워크'를 사용하면 없앨 수 있다.
+//               : Java - google/dagger
+//                 C++  - google/fruit
 //
 //             A - B, C, D
 //             B* b = new B;
@@ -46,7 +49,7 @@ public:
 	// Logger 클래스가 테스트 대역을 적용할 수 있는 설계로 변경하는 작업
 	//  => 틈새 만들기
 	//  =>  : 기존 클래스의 사용법과 동일하게 만드는 것이 좋다.
-	Logger(IFileSystem* p = nullptr) : fs(p) {
+	explicit Logger(IFileSystem* p = nullptr) : fs(p) {
 		if (fs == nullptr) {
 			fs = new FileSystem;
 		}
@@ -70,7 +73,9 @@ private:
 
 //------------------------------------------------
 #include <gtest/gtest.h>
+// GMock을 통해 변경해봅시다.
 
+// Stub
 class TestDouble : public IFileSystem {
 public:
 	bool IsValid(const std::string& filename) override {

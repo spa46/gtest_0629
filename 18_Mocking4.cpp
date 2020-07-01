@@ -1,5 +1,11 @@
 #include <gmock/gmock.h>
 
+// Google Mock - Mocking
+// 1) Interface
+// 2) Abstract class
+// 3) 상속 가능한 class
+// 4) Template class
+
 // Template Class에 대해서도 Mocking을 할 수 있다.
 template <typename T>
 struct StackInterface {
@@ -10,7 +16,7 @@ struct StackInterface {
 };
 
 
-// Template Mocking
+// Template Mocking - 모의 객체를 Template으로 만드는 것도 가능합니다.
 template <typename T>
 class MockStack : public StackInterface<T> {
 public:
