@@ -36,8 +36,23 @@ void Do2(Foo* p) {
 // 행위 검증에서 기본적으로 순서는 검증에 포함되지 않는다.
 // 호출 순서에 대한 검증이 필요하다면,
 // InSequence 를 이용하면 됩니다.
+//
+// Google Mock의 Mock객체 또는 Sequence 객체는 파괴되는 시점에 평가가 진행된다.
 
 using testing::Sequence;
+TEST(FooTest, SequenceTest3) {
+	MockFoo* mock = new MockFoo;
+	Sequence s1, s2;
+	
+	EXPECT_CALL(*mock, First()).InSequence(s1, s2);
+	EXPECT_CALL(*mock, Second()).InSequence(s1);
+	EXPECT_CALL(*mock, Forth()).InSequence(s2);
+	EXPECT_CALL(*mock, Third()).InSequence(s2);
+
+	Do2(mock);
+	delete mock; // !!
+}
+
 //       - Second
 //       |
 // First -

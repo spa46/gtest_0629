@@ -1,10 +1,10 @@
 
 // 21_동작검증
 //   = 행위 기반 검증
-//   1) 호출 여부
-//   2) 호출 횟수
-//   3) 호출 인자
-//   4) 호출 순서
+//   1) 호출 여부 - EXPECT_CALL
+//   2) 호출 횟수 - EXPECT_CALL.Times / WillOnce / WillRepeatedly
+//   3) 호출 인자 - Matchers
+//   4) 호출 순서 - InSequence, Sequence
 
 //  * EXPECT_CALL
 //  * Matcher
